@@ -1,0 +1,13 @@
+* {
+  font-family: Roboto, sans-serif;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+body {
+  margin: 0;
+  background-color: rgb(4,23,45);
+  color: white;
+}

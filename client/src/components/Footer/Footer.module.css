@@ -1,0 +1,15 @@
+.footer {
+  background-color: rgba(5, 15, 30);
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 16px;
+
+  box-sizing: border-box;
+}

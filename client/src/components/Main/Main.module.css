@@ -1,0 +1,8 @@
+.main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 64px 16px;
+  min-height: 100vh;
+  
+  box-sizing: border-box;
+}
