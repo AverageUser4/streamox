@@ -1,0 +1,30 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  
+  padding: 0.6em 1em;
+  
+  background-color: var(--btn-bg-1);
+  color: var(--btn-color-1);
+
+  font-weight: bold;
+  font-size: 16px;
+  text-decoration: none;
+  border: none;
+  border-radius: 3px;
+
+  box-sizing: border-box;
+  transition: background-color 300ms ease-in-out;
+}
+.button:hover {
+  background-color: var(--btn-bg-1-hover);
+}
+
+.button-color-1 {
+  background-color: var(--btn-bg-2);
+}
+.button-color-1:hover {
+  background-color: var(--btn-bg-2-hover);
+}
