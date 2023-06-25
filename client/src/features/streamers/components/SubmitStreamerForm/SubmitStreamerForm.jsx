@@ -1,6 +1,6 @@
 import css from './SubmitStreamerForm.module.css';
-import Text from '../Text/Text';
-import Button from '../Button/Button';
+import { Text } from 'features/ui';
+import { Button } from 'features/ui';
 
 function SubmitStreamerForm() {
   return (
@@ -41,4 +41,4 @@ function SubmitStreamerForm() {
   )
 }
 
-export default SubmitStreamerForm;
+export { SubmitStreamerForm };

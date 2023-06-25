@@ -1,6 +1,6 @@
 import pt from 'prop-types';
 
-export default function Button({ children, style, color, onClick, className = '', type }) {
+function Button({ children, style, color, onClick, className = '', type }) {
   className += ` button button-color-${color}`;
   const clickCallback = (event) => onClick && onClick(event);
   
@@ -24,3 +24,5 @@ Button.propTypes = {
   className: pt.string,
   type: pt.string,
 };
+
+export { Button };

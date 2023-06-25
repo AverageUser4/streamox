@@ -1,6 +1,5 @@
 import css from './Header.module.css';
-import Logo from "../Logo/Logo";
-import { Link } from 'react-router-dom';
+import { Logo, Anchor } from "features/ui";
 
 function Header() {
   return (
@@ -8,10 +7,12 @@ function Header() {
       <div className={css['content']}>
         <Logo/>
 
-        <Link to="/streamers/list">Streamers</Link>
+        <nav className={css['nav']}>
+          <Anchor href="/streamers/list">Streamers</Anchor>
+        </nav>
       </div>
     </header>
   );
 }
 
-export default Header;
+export { Header };

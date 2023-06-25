@@ -1,7 +1,6 @@
 import pt from 'prop-types';
 import css from './Text.module.css';
 import { createElement } from "react";
-import mapFontSize from '../../utils/mapFontSize';
 
 function Text({ 
   children,
@@ -17,7 +16,13 @@ function Text({
     style.color = `var(--color-${color})`;
   }
   if(!style.fontSize) {
-    style.fontSize = mapFontSize(fontSize);
+    if(!Number.isInteger(fontSize) || fontSize === 0) {
+      style.fontSize = 'var(--size-normal)';
+    } else if(fontSize > 0) {
+      style.fontSize = `var(--size-big-${fontSize})`;
+    } else {
+      style.fontSize = `var(--size-small-${Math.abs(fontSize)})`;
+    }
   }
   
   return (
@@ -31,8 +36,8 @@ Text.propTypes = {
   style: pt.object,
   variant: pt.string,
   color: pt.number,
-  fontSize: pt.number,
+  fontSize: pt.number,  
   className: pt.string,
 };
 
-export default Text;
+export { Text };

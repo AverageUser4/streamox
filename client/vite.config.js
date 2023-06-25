@@ -5,4 +5,15 @@ import svgr from 'vite-plugin-svgr'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), svgr()],
+  resolve: {
+    alias: {
+      src: "/src",
+      features: "/src/features",
+      pages: "/src/pages",
+      assets: "/src/assets",
+      utils: "/src/utils",
+      hooks: "/src/hooks",
+      data: "/src/data",
+    },
+  },
 })

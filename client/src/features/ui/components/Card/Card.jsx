@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import css from './Card.module.css';
-import placeholderSrc from '../../assets/images/placeholder.jpg';
-import Text from '../Text/Text';
-import Anchor from '../Anchor/Anchor';
+import placeholderSrc from 'assets/images/placeholder.jpg';
+import { Text } from 'features/ui';
+import { Anchor } from 'features/ui';
 
 function Card({ href, imageSrc, name, desc }) {
   return (
@@ -26,4 +26,4 @@ Card.propTypes = {
   desc: PropTypes.string.isRequired,
 };
 
-export default Card;
+export { Card };

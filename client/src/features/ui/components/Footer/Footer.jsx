@@ -1,5 +1,5 @@
 import css from './Footer.module.css';
-import Text from '../Text/Text';
+import { Text } from 'features/ui';
 
 function Footer() {
   return (
@@ -11,4 +11,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export { Footer };

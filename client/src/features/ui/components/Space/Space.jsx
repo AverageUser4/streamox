@@ -14,4 +14,4 @@ Space.propTypes = {
   size: pt.number,
 };
 
-export default Space;
+export { Space };

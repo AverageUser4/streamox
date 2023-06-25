@@ -1,7 +1,7 @@
-import SubmitStreamerForm from '../components/SubmitStreamerForm/SubmitStreamerForm';
-import StreamersGrid from '../components/StreamersGrid/StreamersGrid';
-import Space from '../components/Space/Space';
-import Text from '../components/Text/Text';
+import { SubmitStreamerForm } from 'features/streamers';
+import { StreamersGrid } from 'features/streamers';
+import { Space } from 'features/ui';
+import { Text } from 'features/ui';
 
 function StreamersList() {
   return (

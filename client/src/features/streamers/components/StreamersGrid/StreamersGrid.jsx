@@ -1,5 +1,5 @@
 import css from './StreamersGrid.module.css';
-import Card from '../Card/Card';
+import { Card } from 'features/ui';
 
 function StreamersGrid() {
   return (
@@ -18,4 +18,4 @@ function StreamersGrid() {
   );
 }
 
-export default StreamersGrid;
+export { StreamersGrid };

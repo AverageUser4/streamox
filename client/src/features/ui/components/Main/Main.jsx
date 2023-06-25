@@ -13,4 +13,4 @@ Main.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default Main;
+export { Main };

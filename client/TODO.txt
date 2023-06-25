@@ -1,0 +1,3 @@
+- 404 page
+- error boundaries
+- code splitting

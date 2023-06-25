@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import css from './Logo.module.css';
-import { ReactComponent as LogoSVG } from '../../assets/icons/logo.svg';
-import Text from "../Text/Text";
+import { ReactComponent as LogoSVG } from 'assets/icons/logo.svg';
+import { Text } from "features/ui";
 
 function Logo() {
   return (
@@ -15,4 +15,4 @@ function Logo() {
   );
 }
 
-export default Logo;
+export { Logo };
