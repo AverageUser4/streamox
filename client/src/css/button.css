@@ -28,3 +28,12 @@
 .button-color-1:hover {
   background-color: var(--btn-bg-2-hover);
 }
+
+.button-kind-text {
+  padding: 0;
+
+  background-color: transparent;
+}
+.button-kind-text:hover {
+  background-color: transparent;
+}

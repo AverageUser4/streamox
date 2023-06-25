@@ -7,3 +7,5 @@ export * from './components/Logo/Logo';
 export * from './components/Main/Main';
 export * from './components/Space/Space';
 export * from './components/Text/Text';
+export * from './components/ProfilePicture/ProfilePicture';
+export * from './components/Grid/Grid';

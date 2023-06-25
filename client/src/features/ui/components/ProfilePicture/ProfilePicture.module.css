@@ -1,0 +1,8 @@
+.image {
+  display: block;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+
+  border: 2px solid var(--color-1);
+}

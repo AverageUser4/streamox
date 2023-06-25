@@ -1,3 +1,4 @@
 - 404 page
 - error boundaries
 - code splitting
+- look into form elements (DRY)

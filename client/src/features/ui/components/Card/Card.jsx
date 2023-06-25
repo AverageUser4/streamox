@@ -1,29 +1,18 @@
 import PropTypes from 'prop-types';
 import css from './Card.module.css';
-import placeholderSrc from 'assets/images/placeholder.jpg';
-import { Text } from 'features/ui';
-import { Anchor } from 'features/ui';
 
-function Card({ href, imageSrc, name, desc }) {
+function Card({ children, imageSrc }) {
   return (
     <div className={css['card']}>
-      <img className={css['image']} src={imageSrc || placeholderSrc}/>
-      <div className={css['content']}>
-        <Text element="h3" color={3} style={{ marginBottom: 12 }}>{name}</Text>
-        <Text style={{ marginBottom: 16 }} className={css['desc']} element="p" variant="p" fontSize={-2}>{desc}</Text>
-        
-        {href && <Anchor style={{ marginLeft: 'auto', width: 'max-content', fontSize: '14px' }} color={1} href={href}>See more</Anchor>}
-        
-      </div>
+      {imageSrc && <img className={css['image']} src={imageSrc}/>}
+      {children}
     </div>
   );
 }
 
 Card.propTypes = {
-  href: PropTypes.string,
+  children: PropTypes.node.isRequired,
   imageSrc: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  desc: PropTypes.string.isRequired,
 };
 
 export { Card };

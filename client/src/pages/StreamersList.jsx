@@ -22,4 +22,4 @@ function StreamersList() {
   );
 }
 
-export default StreamersList;
+export { StreamersList };

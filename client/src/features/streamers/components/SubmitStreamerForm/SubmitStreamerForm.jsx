@@ -1,40 +1,46 @@
+import { useState } from 'react';
 import css from './SubmitStreamerForm.module.css';
-import { Text } from 'features/ui';
-import { Button } from 'features/ui';
+import { Text, Button } from 'features/ui';
+import { Label, Input, TextArea, Select, Option } from 'features/forms';
 
 function SubmitStreamerForm() {
+  const [name, setName] = useState('');
+  const [desc, setDesc] = useState('');
+  const [platform, setPlatform] = useState('');
+  
   return (
     <form className={css['form']}>
       <Text element="h2" variant="h" fontSize={1}>Add Streamer</Text>
       
-      <label className="label">
-        Name
-        <input 
-          className="input"
+      <Label label="Name">
+        <Input 
           placeholder="Streamer's name..."
+          value={name}
+          setValue={setName}
         />
-      </label>
+      </Label>
 
-      <label className="label">
-        Description
-        <textarea 
-          className="input"
-          style={{ resize: 'none' }}
+      <Label label="Description">
+        <TextArea
           placeholder="Say something interesting about your favorite streamer..."
+          value={desc}
+          setValue={setDesc}
         />
-      </label>
-
-      <label className="label">
-        Platform
-        <select className="input">
-          <option value="platform">--- choose platform ---</option>
-          <option value="twitch">Twitch</option>
-          <option value="youtube">YouTube</option>
-          <option value="tiktok">TikTok</option>
-          <option value="kick">Kick</option>
-          <option value="rumble">Rumble</option>
-        </select>
-      </label>
+      </Label>
+      
+      <Label label="Platform">
+        <Select
+          value={platform}
+          setValue={setPlatform}
+        >
+          <Option value="">--- choose platform ---</Option>
+          <Option value="twitch">Twitch</Option>
+          <Option value="youtube">YouTube</Option>
+          <Option value="tiktok">TikTok</Option>
+          <Option value="kick">Kick</Option>
+          <Option value="rumble">Rumble</Option>
+        </Select>
+      </Label>
 
       <Button>Submit</Button>
     </form>

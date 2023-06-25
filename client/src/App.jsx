@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import StreamersList from 'pages/StreamersList';
+import { StreamersList, SingleStreamerPage } from 'pages/';
 import { Footer, Header, Main } from 'features/ui';
 
 function App() {
@@ -13,6 +13,10 @@ function App() {
           
           <Route path="/streamers/list">
             <StreamersList/>
+          </Route>
+
+          <Route path="/streamers/:id">
+            <SingleStreamerPage/>
           </Route>
         </Switch>
       </Main>
