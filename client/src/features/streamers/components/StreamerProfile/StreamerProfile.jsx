@@ -2,10 +2,10 @@ import { Text } from 'features/ui';
 import { ProfilePicture } from 'features/ui';
 import css from './StreamerProfile.module.css';
 import { StreamerVotes } from 'features/streamers';
-import { Space } from 'features/ui';
+import { Space, Loading, ErrorMessage } from 'features/ui';
 import { useFetch } from 'src/hooks';
 import { API_SINGLE_STREAMER_WILDCARD } from 'src/data';
-import { resolveWildcards, resolveImageSrc } from 'src/utils';
+import { resolveWildcards } from 'src/utils';
 import { useParams } from 'react-router-dom';
 
 function StreamerProfile() {
@@ -13,19 +13,28 @@ function StreamerProfile() {
   const { isError, isFetching, data: streamer } = useFetch(resolveWildcards(API_SINGLE_STREAMER_WILDCARD, id));
 
   if(isFetching) {
-    return <div>Loading...</div>;
+    return <Loading/>
   }
   if(isError) {
-    return <div>ERROR!!!!!!</div>;
+    return <ErrorMessage message={"Something went wrong. Please try again later."}/>
   }
 
+  if(streamer.error) {
+    return (
+      <article className={css['container']}>
+        <ErrorMessage message={"Streamer not found!"}/>
+      </article>
+    )
+  }
+  
   const { imageSrc, name, description, platform } = streamer;
+  console.log(description)
   
   return (
     <article className={css['container']}>
       <ProfilePicture 
         className={css['image']}
-        src={resolveImageSrc(imageSrc)}
+        src={imageSrc}
       />
       
       <div>

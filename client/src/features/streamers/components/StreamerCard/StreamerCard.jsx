@@ -9,21 +9,17 @@ import { limitText } from 'utils';
 import { PATH_SINGLE_STREAMER_PAGE_WILDCARD, streamerPT } from 'data/';
 import { resolveWildcards } from 'utils/';
 
-function StreamerCard({ _id, name, description, imageSrc, platform, votes }) {
+function StreamerCard({ streamer = {} }) {
+  const { imageSrc, _id, name, description, platform } = streamer;
+
   return (
     <Card imageSrc={imageSrc || placeholderSrc}>
       <div className={css['content']}>
-        <Text element="h3" color={3} style={{ marginBottom: 12 }}>{name} ({platform})</Text>
+        <Text element="h3" color="secondary" style={{ marginBottom: 12 }}>{name} ({platform})</Text>
         <Text className={css['desc']} element="p" variant="p" fontSize={-2}>{limitText(description)}</Text>
         <Space size={24}/>
-        <StreamerVotes 
-          _id={_id}
-          name={name}
-          description={description}
-          imageSrc={imageSrc}
-          platform={platform}
-          votes={votes}
-        />
+        <StreamerVotes streamer={streamer}/>
+          
         <Space size={16}/>
         <Anchor
           style={{ 
@@ -42,7 +38,7 @@ function StreamerCard({ _id, name, description, imageSrc, platform, votes }) {
 }
 
 StreamerCard.propTypes = {
-  ...streamerPT,
+  streamer: streamerPT,
 };
 
 export { StreamerCard };

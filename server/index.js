@@ -6,21 +6,20 @@ const mongoose = require('mongoose');
 const app = express();
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const PORT = process.env.PORT || 3000;
+const { PORT } = require('./src/data/index');
 
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+app.use(cors({ origin: process.env.WEBSITE_URL || 'http://localhost:5173', credentials: true }));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
 
 app.use(cookieParser());
+// app.use((req, res, next) => {
+//   console.log(new Date(), req.url);
+//   next();
+// })
 app.use((req, res, next) => {
-  console.log(new Date(), req.url);
-  next();
-})
-app.use((req, res, next) => {
-  console.log('cookies in middleware', req.cookies)
   if(!req.cookies.user) {
-    res.cookie('user', Math.random().toString());
+    res.cookie('user', Math.random().toString(), { expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365), sameSite: 'lax' });
   }
   next();
 });

@@ -11,3 +11,5 @@ export * from './components/ProfilePicture/ProfilePicture';
 export * from './components/Grid/Grid';
 export * from './components/ErrorMessage/ErrorMessage';
 export * from './components/SuccessMessage/SuccessMessage';
+export * from './components/Loading/Loading';
+export * from './components/ErrorBoundary/ErrorBoundary';

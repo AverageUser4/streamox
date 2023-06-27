@@ -1,3 +1,4 @@
+import pt from 'prop-types';
 import { useState } from 'react';
 import css from './SubmitStreamerForm.module.css';
 import { Text, Button } from 'features/ui';
@@ -8,7 +9,7 @@ import { API_ADD_STREAMER } from 'src/data';
 const MAX_NAME = 50;
 const MAX_DESC = 250;
 
-function SubmitStreamerForm() {
+function SubmitStreamerForm({ successCallback }) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [platform, setPlatform] = useState('');
@@ -46,11 +47,11 @@ function SubmitStreamerForm() {
       const response = await fetch(API_ADD_STREAMER, { method: 'POST', body: params });
       if(response.status === 201) {
         const json = await response.json();
-        console.log(json)
-        setSuccess('Streamer added successfully!');
+        setSuccess(`Streamer ${json.name} added successfully!`);
         setName('');
         setPlatform('');
         setDescription('');
+        successCallback && successCallback(json);
       } else {
         throw await response.json();
       }
@@ -104,5 +105,9 @@ function SubmitStreamerForm() {
     </form>
   )
 }
+
+SubmitStreamerForm.propTypes = {
+  successCallback: pt.func,
+};
 
 export { SubmitStreamerForm };

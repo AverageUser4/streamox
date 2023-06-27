@@ -1,18 +1,22 @@
-import { SubmitStreamerForm } from 'features/streamers';
-import { StreamersGrid } from 'features/streamers';
-import { Space } from 'features/ui';
-import { Text } from 'features/ui';
+import { SubmitStreamerForm, StreamersGrid } from 'features/streamers';
+import { Space, Text, Loading, ErrorMessage } from 'features/ui';
 import { useFetch } from 'hooks/';
 import { API_STREAMERS_LIST } from 'data/';
+import { useEffect, useState } from 'react';
 
 function StreamersList() {
   const { isError, isFetching, data } = useFetch(API_STREAMERS_LIST);
+  const [streamers, setStreamers] = useState(data);
+
+  useEffect(() => {
+    setStreamers(data);
+  }, [data]);
 
   if(isFetching) {
-    return <div>Loading...</div>;
+    return <Loading/>
   }
   if(isError) {
-    return <div>ERROR!!!!!!</div>;
+    return <ErrorMessage message={"Something went wrong. Please try again later."}/>
   }
 
   return (
@@ -26,11 +30,11 @@ function StreamersList() {
         Streamers
       </Text>
       <Space size={48}/>
-      <SubmitStreamerForm/>
+      <SubmitStreamerForm successCallback={(streamer) => setStreamers(prev => [streamer, ...prev])}/>
       <Space/>
-      {data && <StreamersGrid streamers={data}/>}
+      {streamers && <StreamersGrid streamers={streamers}/>}
     </div>
   );
 }
 
-export { StreamersList };
+export default StreamersList;

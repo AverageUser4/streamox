@@ -13,4 +13,4 @@ function SingleStreamerPage() {
   );
 }
 
-export { SingleStreamerPage };
+export default SingleStreamerPage;

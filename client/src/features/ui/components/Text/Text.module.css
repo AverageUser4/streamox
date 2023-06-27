@@ -3,8 +3,8 @@
   margin: 0;
 
   font-size: var(--size-normal);
-  color: var(--color-1);
-  font-family: Roboto, sans-serif;
+  color: var(--color-primary);
+  font-family: var(--family-1);
   line-height: 1;
 }
 

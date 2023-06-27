@@ -5,7 +5,7 @@ function Footer() {
   return (
     <footer className={css['footer']}>
       <div className={css['content']}>
-        <Text color={6} fontSize={-2}>Streamox Corporations &copy; 2023</Text>
+        <Text color="tertiary" fontSize={-2}>Streamox Corporations &copy; 2023</Text>
       </div>
     </footer>
   );

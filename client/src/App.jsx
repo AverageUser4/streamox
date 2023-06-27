@@ -1,6 +1,11 @@
+import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import { StreamersList, SingleStreamerPage } from 'pages/';
-import { Footer, Header, Main } from 'features/ui';
+import { Footer, Header, Main, Loading } from 'features/ui';
+import { ErrorBoundary } from 'features/ui';
+
+const StreamersList = lazy(() => import('pages/StreamersList'));
+const SingleStreamerPage = lazy(() => import('pages/SingleStreamerPage'));
+const NotFound = lazy(() => import('pages/NotFound'));
 
 function App() {
   return (
@@ -8,17 +13,25 @@ function App() {
       <Header/>
 
       <Main>
-        <Switch>
-          <Redirect exact="true" from="/" to="/streamers/list"/>
-          
-          <Route path="/streamers/list">
-            <StreamersList/>
-          </Route>
+        <ErrorBoundary>
+          <Suspense fallback={<Loading/>}>
+            <Switch>
+              <Redirect exact={true} from="/" to="/streamers/list"/>
+              
+              <Route exact={true} path="/streamers/list">
+                <StreamersList/>
+              </Route>
 
-          <Route path="/streamers/:id">
-            <SingleStreamerPage/>
-          </Route>
-        </Switch>
+              <Route exact={true} path="/streamers/:id">
+                <SingleStreamerPage/>
+              </Route>
+
+              <Route path="*">
+                <NotFound/>
+              </Route>
+            </Switch>
+          </Suspense>
+        </ErrorBoundary>
       </Main>
 
       <Footer/>

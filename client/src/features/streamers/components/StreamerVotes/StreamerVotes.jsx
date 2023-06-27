@@ -3,47 +3,46 @@ import { streamerPT } from 'src/data';
 import { Button } from 'features/ui';
 import { ReactComponent as UpVoteSVG } from 'assets/icons/upvote.svg';
 import { ReactComponent as DownVoteSVG } from 'assets/icons/downvote.svg';
-import { useAuthContext } from 'features/auth';
-import { API_VOTE } from 'src/data';
-import { resolveWildcards } from 'src/utils';
-import { useEffect, useState } from 'react';
+import { API_VOTE_WILDCARD } from 'src/data';
+import { resolveWildcards, debounce } from 'src/utils';
+import { useState, useRef } from 'react';
 
-function StreamerVotes({ votes }) {
-  const [chosenVote, setChosenVote] = useState(null);
-  const { user } = useAuthContext();
-  const userVote = votes?.find(vote => vote.id);
-  let upVotesCount = votes?.filter(vote => vote.vote === 1).length;
-  let downVotesCount = votes?.filter(vote => vote.vote === -1).length;
-  if(userVote?.vote === 1) {
-    upVotesCount--;
+function StreamerVotes({ streamer }) {
+  let { upvotesCount, downvotesCount, userVote } = streamer;
+  
+  const [chosenVote, setChosenVote] = useState(userVote);
+  const debounceRef = useRef(debounce((vote) => {
+    const url = resolveWildcards(API_VOTE_WILDCARD, streamer._id);
+    const body = new URLSearchParams();
+    body.append('vote', vote);
+    console.log('voting', vote)
+    fetch(url, { credentials: 'include', method: 'PUT', body })
+      .then((response) => console.log(response))
+      .catch((error) => console.error(error));
+  }, 300));
+
+  if(userVote === 1) {
+    upvotesCount--;
   }
-  if(userVote?.vote === -1) {
-    downVotesCount--;
+  if(userVote === -1) {
+    downvotesCount--;
   }
   if(chosenVote === 1) {
-    upVotesCount++;
+    upvotesCount++;
   }
   if(chosenVote === -1) {
-    downVotesCount++;
+    downvotesCount++;
   }
-
-  useEffect(() => {
-    if(userVote) {
-      setChosenVote(userVote.vote);
-    }
-  }, [userVote]);
 
   function onClick(event) {
-    const newChosenVote = Number(event.currentTarget.name);
-    if(chosenVote !== newChosenVote) {
-      setChosenVote(newChosenVote);
-    } else {
-      setChosenVote(null);
+    let newChosenVote = Number(event.currentTarget.name);
+    
+    if(chosenVote === newChosenVote) {
+      newChosenVote = 0;
     }
-  }
 
-  if(!votes) {
-    return <div>Loading....</div>;
+    setChosenVote(newChosenVote);
+    debounceRef.current(newChosenVote);
   }
 
   return (
@@ -58,7 +57,7 @@ function StreamerVotes({ votes }) {
         `}
       >
         <UpVoteSVG/>
-        {upVotesCount}
+        {upvotesCount}
       </Button>
       
       <Button 
@@ -71,14 +70,14 @@ function StreamerVotes({ votes }) {
         `}
       >
         <DownVoteSVG/>
-        {downVotesCount}
+        {downvotesCount}
       </Button>
     </div>
   );
 }
 
 StreamerVotes.propTypes = {
-  ...streamerPT,
+  streamer: streamerPT,
 };
 
 export { StreamerVotes };

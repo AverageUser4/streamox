@@ -1,8 +1,8 @@
 import pt from 'prop-types';
 import { Link } from 'react-router-dom';
 
-function Anchor({ children, href, style, color, className = '', isPlainAnchor }) {
-  className += ` button button-color-${color}`;
+function Anchor({ children, href, style, color, className = '', isPlainAnchor, kind = '' }) {
+  className += ` button button-color-${color} button-kind-${kind}`;
   
   if(isPlainAnchor) {
     return (
@@ -34,6 +34,7 @@ Anchor.propTypes = {
   className: pt.string,
   href: pt.string.isRequired,
   isPlainAnchor: pt.bool,
+  kind: pt.string,
 };
 
 export { Anchor };

@@ -4,7 +4,6 @@
 
   /* text */
   --family-1: Roboto, sans-serif;
-  --family-2: 'Roboto Mono', Roboto, sans-serif;
 
   /* big-2 is bigger than big-1, small-3 is smaller than small-2 etc. */
   --size-normal: clamp(16px, 1.5vw, 18px);
@@ -14,26 +13,21 @@
   --size-small-1: clamp(14px, 1.3vw, 18px);
   --size-small-2: clamp(12px, 1.2vw, 14px);
 
-  --color-1: #ffffff;
-  --color-2: #7295bc;
-  --color-3: #00ffed;
-  --color-4: #08a0e9;
-  --color-5: #7a3aed;
-  --color-6: #9cb5d1;
-  --color-7: #6d7a87;
-  --color-8: #5276a0;
-  --color-9: #132d4a;
-  --color-10: #657380;
+  /* colors */
+  --color-primary: #ffffff;
+  --color-secondary: #00ffed;
+  --color-tertiary: #9cb5d1;
+  
+  --link-primary: #08a0e9;
+  
+  --bg-primary: #04172d;
+  --bg-secondary: #050F1E;
+  --bg-tertiary: #132d4a;
+  --bg-dark: #000000;
 
-  --btn-color-1: #ffffff;
-  --btn-bg-1: #7a3aed;
-  --btn-bg-1-hover: #5d12e4;
-  --btn-bg-2: #5fc49a;
-  --btn-bg-2-hover: #3d7f64;
-   
-  --bg-1: #000000;
-  --bg-2: #04172d;
-  --bg-3: #132d4a;
-  --bg-4: #274364;
-  --bg-5: #ffffff;
+  --btn-color-primary: #ffffff;
+  --btn-bg-primary: #7a3aed;
+  --btn-bg-primary-hover: #5d12e4;
+  --btn-bg-secondary: #5fc49a;
+  --btn-bg-secondary-hover: #3d7f64;
 }

@@ -2,15 +2,23 @@ const express = require('express');
 const router = express.Router();
 const Streamer = require('../models/Streamer');
 
-function extendStreamerData(streamer) {
+function extendStreamer(streamer, user) {
+  streamer = JSON.parse(JSON.stringify(streamer));
+  const { votes } = streamer;
+  delete streamer.votes;
+  const userVote = votes.find(vote => vote.id === user);
+
+  streamer.upvotesCount = votes.filter(vote => vote.vote === 1).length;
+  streamer.downvotesCount = votes.filter(vote => vote.vote === -1).length;
+  streamer.userVote = userVote?.vote || 0;
+  
   return streamer;
 }
 
 router.get('/', async (req, res) => {
-  console.log('cookies in router.get("/")',req.cookies, req.signedCookies)
   try {
     let streamers = await Streamer.find().sort({ createdAt: -1 });
-    streamers = streamers.map(extendStreamerData);
+    streamers = streamers.map((streamer) => extendStreamer(streamer, req.cookies.user));
     res.json(streamers);
   } catch(error) {
     console.error(error);
@@ -24,10 +32,10 @@ router.post('/', async (req, res) => {
   try {
     const streamer = Streamer({ name, platform, description, imageSrc });
     await streamer.save();
-    res.status(201).json(streamer);
+    res.status(201).json(extendStreamer(streamer, req.cookies.user));
   } catch(error) {
     console.error(error);
-    res.json({ error: 'Error trying to add the streamer to database. Please try again later.' });
+    res.json({ error: error.name === 'ValidationError' ? error.message : 'Error trying to add the streamer to database. Please try again later.' });
   }
 });
 
@@ -38,7 +46,7 @@ router.get('/:id', async (req, res) => {
       res.json({ error: 'User with given ID does not exist!' });
       return;
     } else {
-      res.json(streamer);
+      res.json(extendStreamer(streamer, req.cookies.user));
       return;
     }
   } catch(error) {
@@ -54,29 +62,29 @@ router.put('/:id/vote', async (req, res) => {
     if(!user) {
       res.json({ error: 'Could not verify user trying to vote. Make sure the "user" cookie is set.' });
     }
-    if(!vote) {
-      res.json({ error: 'Number indicating whether vote was negative (-1) or positive (1) was not set in request body.' });
+    if(vote !== 1 && vote !== 0 && vote !== -1) {
+      res.json({ error: `Number indicating whether vote was negative (-1), positive (1) or should be removed (0) did not have correct value. Received: "${req.body.vote}".` });
     }
 
     const streamer = await Streamer.findById(req.params.id);
     if(!streamer) {
-      res.json({ error: 'User with given ID does not exist!' });
+      res.json({ error: 'Streamer with given ID does not exist!' });
       return;
     } else {
       const currentVoteIndex = streamer.votes.findIndex(vote => vote.id === user);
-      const currentVote = streamer.votes[currentVoteIndex];
-      if(!currentVote) {
-        streamer.votes.push({ id: user, vote });
-      } else {
-        if(currentVote.vote === vote) {
+      
+      if(currentVoteIndex !== -1) {
+        if(vote === 0) {
           streamer.votes.splice(currentVoteIndex, 1);
         } else {
-          streamer.votes[currentVoteIndex].vote *= -1;
+          streamer.votes[currentVoteIndex] = { id: user, vote };
         }
+      } else if(vote !== 0) {
+        streamer.votes.push({ id: user, vote });
       }
+
       await streamer.save();
       res.status(201).end();
-      return;
     }
   } catch(error) {
     console.error(error);
@@ -85,8 +93,3 @@ router.put('/:id/vote', async (req, res) => {
 });
 
 module.exports = router;
-
-// POST /streamers: An endpoint to receive new streamer submissions from the frontend and store them in a database.
-// GET /streamers: An endpoint to return all the stored streamer submissions in response to a request from the frontend.
-// GET /streamers/[streamerId]: An endpoint to return data about a specific streamer.
-// PUT /streamers/[streamerId]/vote: An endpoint to receive an upvote for a specific streamer and update their current upvote/downvote count.

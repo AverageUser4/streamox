@@ -1,9 +1,12 @@
+const { PORT } = require('../data/index');
 const mongoose = require('mongoose');
 
 const streamerSchema = new mongoose.Schema({
   name: { 
     type: String,
     required: true,
+    minLength: 1,
+    maxLength: 50,
   },
   platform: { 
     type: String,
@@ -12,6 +15,8 @@ const streamerSchema = new mongoose.Schema({
   description: { 
     type: String,
     required: true,
+    minLength: 1,
+    maxLength: 250,
   },
   votes: {
     type: [],
@@ -26,7 +31,7 @@ const streamerSchema = new mongoose.Schema({
   imageSrc: { 
     type: String,
     required: true,
-    default: 'http://localhost:3000/streamer.png',
+    default: `http://localhost:${process.env.PORT || 3000}/streamer.png`,
   },
 });
 

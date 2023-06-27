@@ -1,8 +1,8 @@
 .input {
   padding: 8px 16px;
   
-  background-color: rgb(19, 45, 74);
-  color: rgb(255, 255, 255);
+  background-color: var(--bg-tertiary);
+  color: var(--color-primary);
   border: none;
   border-radius: 3px;
   font-size: 18px;

@@ -1,17 +1,16 @@
-import { Link } from "react-router-dom";
 import css from './Logo.module.css';
 import { ReactComponent as LogoSVG } from 'assets/icons/logo.svg';
-import { Text } from "features/ui";
+import { Text, Anchor } from "features/ui";
 
 function Logo() {
   return (
-    <Link to="/" className={css['container']}>
+    <Anchor href="/" className={css['container']} kind="text">
       <LogoSVG className={css['icon']}/>
       <div>
         <Text element="span" fontSize={1}>Streamox</Text>        
         <Text element="span" fontSize={-2}>Streaming. Redefined.</Text>        
       </div>
-    </Link>
+    </Anchor>
   );
 }
 

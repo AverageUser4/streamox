@@ -35,7 +35,7 @@ Text.propTypes = {
   element: pt.string,
   style: pt.object,
   variant: pt.string,
-  color: pt.number,
+  color: pt.string,
   fontSize: pt.number,  
   className: pt.string,
 };

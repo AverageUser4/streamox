@@ -8,7 +8,7 @@ function StreamersGrid({ streamers }) {
       {streamers.map(streamer => 
         <StreamerCard 
           key={streamer._id}
-          {...streamer}
+          streamer={streamer}
         />
       )}
     </Grid>
