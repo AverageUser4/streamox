@@ -4,3 +4,10 @@
   flex-wrap: wrap;
   gap: 8px 24px;
 }
+
+.vote {
+  opacity: 0.5;
+}
+.vote--active {
+  opacity: 1;
+}

@@ -1,16 +1,31 @@
 import { Text } from 'features/ui';
 import { ProfilePicture } from 'features/ui';
 import css from './StreamerProfile.module.css';
-import streamerSrc from 'assets/images/streamer.png';
 import { StreamerVotes } from 'features/streamers';
 import { Space } from 'features/ui';
+import { useFetch } from 'src/hooks';
+import { API_SINGLE_STREAMER_WILDCARD } from 'src/data';
+import { resolveWildcards, resolveImageSrc } from 'src/utils';
+import { useParams } from 'react-router-dom';
 
 function StreamerProfile() {
+  const { id } = useParams();
+  const { isError, isFetching, data: streamer } = useFetch(resolveWildcards(API_SINGLE_STREAMER_WILDCARD, id));
+
+  if(isFetching) {
+    return <div>Loading...</div>;
+  }
+  if(isError) {
+    return <div>ERROR!!!!!!</div>;
+  }
+
+  const { imageSrc, name, description, platform } = streamer;
+  
   return (
     <article className={css['container']}>
       <ProfilePicture 
         className={css['image']}
-        src={streamerSrc}
+        src={resolveImageSrc(imageSrc)}
       />
       
       <div>
@@ -19,7 +34,7 @@ function StreamerProfile() {
           variant="h"
           fontSize={1}
         >
-          Adam
+          {name} ({platform})
         </Text>
 
         <Text
@@ -27,12 +42,12 @@ function StreamerProfile() {
           variant="p"
           fontSize={-1}
         >
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+          {description}
         </Text>
 
         <Space size={16}/>
 
-        <StreamerVotes/>
+        <StreamerVotes streamer={streamer}/>
       </div>
     </article>
   );

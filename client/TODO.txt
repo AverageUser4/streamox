@@ -2,3 +2,4 @@
 - error boundaries
 - code splitting
 - look into form elements (DRY)
+- votes are inefficient on frontend

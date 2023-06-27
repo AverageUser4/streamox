@@ -9,3 +9,5 @@ export * from './components/Space/Space';
 export * from './components/Text/Text';
 export * from './components/ProfilePicture/ProfilePicture';
 export * from './components/Grid/Grid';
+export * from './components/ErrorMessage/ErrorMessage';
+export * from './components/SuccessMessage/SuccessMessage';

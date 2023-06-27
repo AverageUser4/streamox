@@ -8,10 +8,22 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const PORT = process.env.PORT || 3000;
 
+app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
 app.use(express.urlencoded({ extended: false }));
-app.use(cors());
-app.use(cookieParser());
 app.use(express.static('public'));
+
+app.use(cookieParser());
+app.use((req, res, next) => {
+  console.log(new Date(), req.url);
+  next();
+})
+app.use((req, res, next) => {
+  console.log('cookies in middleware', req.cookies)
+  if(!req.cookies.user) {
+    res.cookie('user', Math.random().toString());
+  }
+  next();
+});
 
 app.use('/streamers', require('./src/routes/streamers'));
 app.use((req, res) => {

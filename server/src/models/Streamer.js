@@ -26,7 +26,7 @@ const streamerSchema = new mongoose.Schema({
   imageSrc: { 
     type: String,
     required: true,
-    default: 'streamer.png',
+    default: 'http://localhost:3000/streamer.png',
   },
 });
 

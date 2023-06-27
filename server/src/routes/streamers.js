@@ -2,9 +2,15 @@ const express = require('express');
 const router = express.Router();
 const Streamer = require('../models/Streamer');
 
+function extendStreamerData(streamer) {
+  return streamer;
+}
+
 router.get('/', async (req, res) => {
+  console.log('cookies in router.get("/")',req.cookies, req.signedCookies)
   try {
-    const streamers = await Streamer.find().sort({ createdAt: -1 });
+    let streamers = await Streamer.find().sort({ createdAt: -1 });
+    streamers = streamers.map(extendStreamerData);
     res.json(streamers);
   } catch(error) {
     console.error(error);
@@ -43,7 +49,6 @@ router.get('/:id', async (req, res) => {
 
 router.put('/:id/vote', async (req, res) => {
   try {
-    console.log(req.cookies);
     const { user } = req.cookies;
     const vote = Number(req.body.vote);
     if(!user) {

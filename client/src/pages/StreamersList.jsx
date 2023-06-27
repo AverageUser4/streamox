@@ -2,8 +2,19 @@ import { SubmitStreamerForm } from 'features/streamers';
 import { StreamersGrid } from 'features/streamers';
 import { Space } from 'features/ui';
 import { Text } from 'features/ui';
+import { useFetch } from 'hooks/';
+import { API_STREAMERS_LIST } from 'data/';
 
 function StreamersList() {
+  const { isError, isFetching, data } = useFetch(API_STREAMERS_LIST);
+
+  if(isFetching) {
+    return <div>Loading...</div>;
+  }
+  if(isError) {
+    return <div>ERROR!!!!!!</div>;
+  }
+
   return (
     <div>
       <Text 
@@ -17,7 +28,7 @@ function StreamersList() {
       <Space size={48}/>
       <SubmitStreamerForm/>
       <Space/>
-      <StreamersGrid/>
+      {data && <StreamersGrid streamers={data}/>}
     </div>
   );
 }
