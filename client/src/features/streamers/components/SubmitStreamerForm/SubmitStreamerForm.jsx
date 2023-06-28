@@ -3,11 +3,8 @@ import { useState } from 'react';
 import css from './SubmitStreamerForm.module.css';
 import { Text, Button } from 'features/ui';
 import { Label, Input, TextArea, Select, Option } from 'features/forms';
-import { ErrorMessage, SuccessMessage } from 'src/features/ui';
-import { API_ADD_STREAMER } from 'src/data';
-
-const MAX_NAME = 50;
-const MAX_DESC = 250;
+import { Message } from 'src/features/ui';
+import { API_ADD_STREAMER, STREAMER_MAX_DESCRIPTION_LENGTH, STREAMER_MAX_NAME_LENGTH } from 'src/data';
 
 function SubmitStreamerForm({ successCallback }) {
   const [name, setName] = useState('');
@@ -26,14 +23,14 @@ function SubmitStreamerForm({ successCallback }) {
       if(!name) {
         throw 'You have to provide name of the streamer!';
       }
-      if(name.length > MAX_NAME) {
-        throw `Streamer's name may be at most ${MAX_NAME} characters long!`;
+      if(name.length > STREAMER_MAX_NAME_LENGTH) {
+        throw `Streamer's name may be at most ${STREAMER_MAX_NAME_LENGTH} characters long!`;
       }
       if(!description) {
         throw 'You have to provide description of the streamer!';
       }
-      if(description.length > MAX_DESC) {
-        throw `Streamer's description may be at most ${MAX_DESC} characters long!`;
+      if(description.length > STREAMER_MAX_DESCRIPTION_LENGTH) {
+        throw `Streamer's description may be at most ${STREAMER_MAX_DESCRIPTION_LENGTH} characters long!`;
       }
       if(!platform) {
         throw 'Choose a platform!';
@@ -100,8 +97,8 @@ function SubmitStreamerForm({ successCallback }) {
 
       <Button>Submit</Button>
 
-      {error && <ErrorMessage message={error}/>}
-      {success && <SuccessMessage message={success}/>}
+      {error && <Message type="danger" message={error}/>}
+      {success && <Message type="success" message={success}/>}
     </form>
   )
 }

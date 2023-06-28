@@ -1,6 +1,6 @@
 import css from './Header.module.css';
 import { Logo, Anchor } from "features/ui";
-import { PATH_STREAMERS_LIST } from 'data/';
+import { PATH_STREAMERS_LIST } from 'src/data';
 
 function Header() {
   return (

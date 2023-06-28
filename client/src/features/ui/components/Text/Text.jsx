@@ -7,15 +7,15 @@ function Text({
   element = 'span',
   variant = '',
   style = {},
-  color = 1,
+  color = '',
   fontSize = 0,
   className = '',
 }) {
   className += ` ${css['text']} ${css[variant]}`;
-  if(!style.color) {
+  if(color && !style.color) {
     style.color = `var(--color-${color})`;
   }
-  if(!style.fontSize) {
+  if(fontSize && !style.fontSize) {
     if(!Number.isInteger(fontSize) || fontSize === 0) {
       style.fontSize = 'var(--size-normal)';
     } else if(fontSize > 0) {

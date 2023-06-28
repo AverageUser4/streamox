@@ -1,7 +1,7 @@
 import { SubmitStreamerForm, StreamersGrid } from 'features/streamers';
-import { Space, Text, Loading, ErrorMessage } from 'features/ui';
-import { useFetch } from 'hooks/';
-import { API_STREAMERS_LIST } from 'data/';
+import { Space, Text, Loading, Message } from 'features/ui';
+import { useFetch } from 'src/hooks';
+import { API_STREAMERS_LIST } from 'src/data';
 import { useEffect, useState } from 'react';
 
 function StreamersList() {
@@ -16,7 +16,7 @@ function StreamersList() {
     return <Loading/>
   }
   if(isError) {
-    return <ErrorMessage message={"Something went wrong. Please try again later."}/>
+    return <Message type="danger" message={"Something went wrong. Please try again later."}/>
   }
 
   return (

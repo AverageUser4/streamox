@@ -1,20 +1,23 @@
-.text {
-  display: block;
-  margin: 0;
+@layer {
 
-  font-size: var(--size-normal);
-  color: var(--color-primary);
-  font-family: var(--family-1);
-  line-height: 1;
-}
-
-.h {
-  /* change to just roboto by default*/
-  line-height: 1.4;
-  font-weight: 700;
-}
-
-.p {
-  font-size: clamp(14px, 1.5vw, 20px);
-  line-height: 1.5;
+  .text {
+    display: block;
+    margin: 0;
+  
+    font-size: var(--size-normal);
+    color: var(--color-primary);
+    font-family: var(--family-1);
+    line-height: 1;
+  }
+  
+  .h {
+    line-height: 1.4;
+    font-weight: 700;
+  }
+  
+  .p {
+    font-size: clamp(14px, 1.5vw, 20px);
+    line-height: 1.5;
+  }
+  
 }

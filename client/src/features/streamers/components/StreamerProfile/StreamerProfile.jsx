@@ -2,7 +2,7 @@ import { Text } from 'features/ui';
 import { ProfilePicture } from 'features/ui';
 import css from './StreamerProfile.module.css';
 import { StreamerVotes } from 'features/streamers';
-import { Space, Loading, ErrorMessage } from 'features/ui';
+import { Space, Loading, Message } from 'features/ui';
 import { useFetch } from 'src/hooks';
 import { API_SINGLE_STREAMER_WILDCARD } from 'src/data';
 import { resolveWildcards } from 'src/utils';
@@ -16,13 +16,13 @@ function StreamerProfile() {
     return <Loading/>
   }
   if(isError) {
-    return <ErrorMessage message={"Something went wrong. Please try again later."}/>
+    return <Message type="danger" message={"Something went wrong. Please try again later."}/>
   }
 
   if(streamer.error) {
     return (
       <article className={css['container']}>
-        <ErrorMessage message={"Streamer not found!"}/>
+        <Message type="danger" message={"Streamer not found!"}/>
       </article>
     )
   }

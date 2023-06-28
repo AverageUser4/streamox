@@ -11,3 +11,5 @@ export const PATH_LANDING = '/';
 export const PATH_STREAMERS_LIST = '/streamers/list';
 export const PATH_SINGLE_STREAMER_PAGE_WILDCARD = '/streamers/:id';
 
+export const STREAMER_MAX_NAME_LENGTH = 50;
+export const STREAMER_MAX_DESCRIPTION_LENGTH = 250;

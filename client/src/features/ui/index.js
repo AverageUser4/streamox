@@ -9,7 +9,6 @@ export * from './components/Space/Space';
 export * from './components/Text/Text';
 export * from './components/ProfilePicture/ProfilePicture';
 export * from './components/Grid/Grid';
-export * from './components/ErrorMessage/ErrorMessage';
-export * from './components/SuccessMessage/SuccessMessage';
+export * from './components/Message/Message';
 export * from './components/Loading/Loading';
 export * from './components/ErrorBoundary/ErrorBoundary';

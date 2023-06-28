@@ -1,5 +1,7 @@
 # Streamox - Streaming. Redefined.
 
+Install MongoDB to run this app.
+
 ## Install App
 `npm run install-app`
 ## Start App
@@ -47,7 +49,7 @@
     
 ### PUT streamers/:id/vote
 #### body payload:
-    { vote: -1/*downvote*/ | 0 /*remove vote*/ | 1/*upvote*/
+    { vote: -1/*downvote*/ | 0 /*remove vote*/ | 1/*upvote*/ }
 #### success:
     Plain 201 response
 #### failure:

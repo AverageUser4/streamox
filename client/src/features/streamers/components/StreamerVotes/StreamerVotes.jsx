@@ -15,9 +15,21 @@ function StreamerVotes({ streamer }) {
     const url = resolveWildcards(API_VOTE_WILDCARD, streamer._id);
     const body = new URLSearchParams();
     body.append('vote', vote);
-    fetch(url, { credentials: 'include', method: 'PUT', body })
-      .then((response) => console.log(response))
-      .catch((error) => console.error(error));
+
+    async function sendVote() {
+      try {
+        const response = await fetch(url, { credentials: 'include', method: 'PUT', body });
+        let json;
+        if(response.status !== 201) {
+          json = await response.json();
+          throw json.error;
+        }
+      } catch(error) {
+        console.error(error);
+      }
+    }
+
+    sendVote();
   }, 300));
 
   if(userVote === 1) {

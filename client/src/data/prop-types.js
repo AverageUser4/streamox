@@ -8,10 +8,6 @@ export const streamerPT = pt.shape({
   upvotesCount: pt.number.isRequired,
   downvotesCount: pt.number.isRequired,
   userVote: pt.number.isRequired,
-  // votes: pt.arrayOf(pt.shape({
-  //   id: pt.string,
-  //   vote: pt.string,
-  // })).isRequired,
 });
 
 export const arrayOfStreamersPT = pt.arrayOf(streamerPT);

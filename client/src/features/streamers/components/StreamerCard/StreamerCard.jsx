@@ -5,9 +5,8 @@ import { Card } from 'features/ui';
 import { Space } from 'features/ui';
 import { StreamerVotes } from 'features/streamers';
 import placeholderSrc from 'assets/images/placeholder.jpg';
-import { limitText } from 'utils';
-import { PATH_SINGLE_STREAMER_PAGE_WILDCARD, streamerPT } from 'data/';
-import { resolveWildcards } from 'utils/';
+import { PATH_SINGLE_STREAMER_PAGE_WILDCARD, streamerPT } from 'src/data';
+import { resolveWildcards, limitText } from 'src/utils/';
 
 function StreamerCard({ streamer = {} }) {
   const { imageSrc, _id, name, description, platform } = streamer;
@@ -27,7 +26,7 @@ function StreamerCard({ streamer = {} }) {
             width: 'max-content',
             fontSize: '14px' 
           }}
-          color={1}
+          color="secondary"
           href={resolveWildcards(PATH_SINGLE_STREAMER_PAGE_WILDCARD, _id)}
         >
           See more

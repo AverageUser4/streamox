@@ -1,8 +1,12 @@
 import { arrayOfStreamersPT } from 'src/data';
 import { StreamerCard } from 'features/streamers';
-import { Grid } from 'features/ui';
+import { Grid, Message } from 'features/ui';
 
 function StreamersGrid({ streamers }) {
+  if(!streamers.length) {
+    return <Message type="danger" message="No streamers found!"/>
+  }
+  
   return (
     <Grid>
       {streamers.map(streamer => 

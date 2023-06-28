@@ -24,10 +24,10 @@
     background-color: var(--btn-bg-primary-hover);
   }
   
-  .button-color-1 {
+  .button-color-secondary {
     background-color: var(--btn-bg-secondary);
   }
-  .button-color-1:hover {
+  .button-color-secondary:hover {
     background-color: var(--btn-bg-secondary-hover);
   }
   
