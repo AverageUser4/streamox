@@ -1,3 +1,9 @@
+.name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .content {
   padding: 16px;
 }

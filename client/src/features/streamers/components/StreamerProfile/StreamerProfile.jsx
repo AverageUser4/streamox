@@ -28,7 +28,6 @@ function StreamerProfile() {
   }
   
   const { imageSrc, name, description, platform } = streamer;
-  console.log(description)
   
   return (
     <article className={css['container']}>

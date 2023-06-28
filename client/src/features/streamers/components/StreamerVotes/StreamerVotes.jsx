@@ -15,7 +15,6 @@ function StreamerVotes({ streamer }) {
     const url = resolveWildcards(API_VOTE_WILDCARD, streamer._id);
     const body = new URLSearchParams();
     body.append('vote', vote);
-    console.log('voting', vote)
     fetch(url, { credentials: 'include', method: 'PUT', body })
       .then((response) => console.log(response))
       .catch((error) => console.error(error));

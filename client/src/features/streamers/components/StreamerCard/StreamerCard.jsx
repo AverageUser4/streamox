@@ -15,7 +15,7 @@ function StreamerCard({ streamer = {} }) {
   return (
     <Card imageSrc={imageSrc || placeholderSrc}>
       <div className={css['content']}>
-        <Text element="h3" color="secondary" style={{ marginBottom: 12 }}>{name} ({platform})</Text>
+        <Text className={css['name']} element="h3" color="secondary" style={{ marginBottom: 12 }}>{name} ({platform})</Text>
         <Text className={css['desc']} element="p" variant="p" fontSize={-2}>{limitText(description)}</Text>
         <Space size={24}/>
         <StreamerVotes streamer={streamer}/>

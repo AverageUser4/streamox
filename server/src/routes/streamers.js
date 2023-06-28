@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  const { name, platform , description, imageSrc } = req.body;
+  let { name, platform , description, imageSrc } = req.body;
   
   try {
     const streamer = Streamer({ name, platform, description, imageSrc });
@@ -61,9 +61,11 @@ router.put('/:id/vote', async (req, res) => {
     const vote = Number(req.body.vote);
     if(!user) {
       res.json({ error: 'Could not verify user trying to vote. Make sure the "user" cookie is set.' });
+      return;
     }
     if(vote !== 1 && vote !== 0 && vote !== -1) {
       res.json({ error: `Number indicating whether vote was negative (-1), positive (1) or should be removed (0) did not have correct value. Received: "${req.body.vote}".` });
+      return;
     }
 
     const streamer = await Streamer.findById(req.params.id);

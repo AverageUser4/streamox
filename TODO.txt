@@ -1,2 +1,1 @@
-- add serverside validation
-- add some sort of pagination
+- look into fetch calls

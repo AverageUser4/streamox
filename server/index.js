@@ -13,13 +13,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
 
 app.use(cookieParser());
-// app.use((req, res, next) => {
-//   console.log(new Date(), req.url);
-//   next();
-// })
 app.use((req, res, next) => {
   if(!req.cookies.user) {
-    res.cookie('user', Math.random().toString(), { expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365), sameSite: 'lax' });
+    res.cookie('user', Math.random().toString(), { expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365) });
   }
   next();
 });
